@@ -6,6 +6,7 @@
 
 #include "statistics.h"
 #include <gtest/gtest.h>
+#include <algorithm>
 using namespace std;
 
 class StatisticsTest : public ::testing::Test {
