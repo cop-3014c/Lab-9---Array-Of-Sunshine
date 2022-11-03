@@ -5,7 +5,9 @@
 // TODO: Fill in your name above.
 
 #include "statistics.h"
+
 #include <gtest/gtest.h>
+
 #include <algorithm>
 using namespace std;
 
@@ -72,40 +74,6 @@ TEST_F(StatisticsTest, MaximumTest) { GENERATE_TESTS(maximum, max); }
 TEST_F(StatisticsTest, MedianTest) { GENERATE_TESTS(median, med); }
 
 TEST_F(StatisticsTest, AverageTest) { GENERATE_TESTS(average, avg); }
-
-#define COND(v, i) (v != expected_##v##i)
-#define CONDS(i) (COND(min, i) || COND(max, i) || COND(med, i) || COND(avg, i))
-
-#define S1(i)                                            \
-  "      Expected: all_stats(array" << i << ", " << n##i \
-                                    << ", min, max, med, avg)\n"
-#define S2                                                                  \
-  "      Which is: min = " << min << ", max = " << max << ", med = " << med \
-                           << ", avg = " << avg << "\n"
-#define S3_GEN(v, i) "expected_" << #v << i << " = " << expected_##v##i
-#define S3(i)                                                            \
-  "To be equal to: " << S3_GEN(min, i) << ", " << S3_GEN(max, i) << ", " \
-                     << S3_GEN(med, i) << ", " << S3_GEN(avg, i) << "\n"
-
-#define GENERATE_ALLSTATS(i)                             \
-  {                                                      \
-    min = -1;                                            \
-    max = -1;                                            \
-    med = -1;                                            \
-    avg = -1;                                            \
-    all_stats(array##i, n##i, min, max, med, avg);       \
-    if (CONDS(i)) ADD_FAILURE() << S1(i) << S2 << S3(i); \
-  }
-
-TEST_F(StatisticsTest, AllStatsTest) {
-  int min, max, med, avg;
-
-  GENERATE_ALLSTATS(1);
-  GENERATE_ALLSTATS(2);
-  GENERATE_ALLSTATS(3);
-  GENERATE_ALLSTATS(4);
-  GENERATE_ALLSTATS(5);
-}
 
 int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);

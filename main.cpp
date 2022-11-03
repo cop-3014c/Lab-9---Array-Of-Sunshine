@@ -3,11 +3,27 @@
 @author Hong Tai Wei
 */
 
+#include <algorithm>
 #include <ios>
 #include <iostream>
 #include <limits>
+
 #include "statistics.h"
 using namespace std;
+
+// Compute the min, max, median and average of an unsorted array.
+void all_stats(const int a[SIZE], int n, int& min, int& max, int& med,
+               int& avg) {
+  int s[SIZE];
+  copy(a, a + n, s);
+  sort(s, s + n);
+
+  min = minimum(s, n);
+  max = maximum(s, n);
+  med = median(s, n);
+  avg = average(s, n);
+  return;
+}
 
 /**
 @brief Main function for statistics program

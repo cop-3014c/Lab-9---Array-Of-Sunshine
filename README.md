@@ -1,10 +1,6 @@
 # Lab 9: Array Of Sunshine
 
-In this lab, you will learn how to:
-- use pass-by-value arguments in functions
-- use pass-by-reference arguments in functions
-- use 1-dimensional arrays
-- call functions from external libraries
+In this lab, you will learn how to use 1-dimensional arrays.
 
 For this assignment, you will write a series of functions that calculate basic statistics based on the values in an `int` array, then practice testing them via the GoogleTest framework.
 
@@ -32,12 +28,11 @@ You have the same `make` commands as last time. **Don't use g++**.
 
 ## Program specifications
 
-These are the 5 functions you will be working with for this assignment (defined in statistics.h):
+These are the 4 functions you will be working with for this assignment (defined in statistics.h):
 * `int minimum(const int a[], int n);`
 * `int maximum(const int a[], int n);`
 * `int average(const int a[], int n);`
 * `int median(const int a[], int n);`
-* `void all_stats(const int a[SIZE], int n, int& min, int& max, int& med, int& avg);`
 
 Also, in `statistics.h`, there is a constant called `SIZE`. It's a global constant. You're allowed to use it.
 
@@ -127,25 +122,6 @@ Examples (see definition of median, above, for explanation):
 * `median({1, 2}, 2)` is 1 because it's the average of 1 and 2 and this needs to be rounded down to an integer.
 * You can assume your function will never receive an array like `{3, 1, 2}` as an input because that's not sorted.
 
-### `void all_stats(const int a[SIZE], int n, int& min, int& max, int& med, int& avg)`
-
-For this function, writing `const int a[SIZE]` for the argument instead of just `const int a[]` makes the compiler enforce that the size of the input array is equal to the value of the global constant `SIZE`.
-It wasn't needed in the other functions for Part 1, but it's needed for this one. (If you're not sure why, maybe you'll understand why after implementing it.)
-
-**Input:** an array of ints and an int representing how much of the array to look at.
-You can also assume that n is greater than 0 and less than `SIZE`. Note that this array doesn't have to be sorted.
-
-**Function behavior:** The return type is void so the function should not return anything. 
-However, it should update the values of the variables given to it as the arguments `min, max, med, avg` to be the value of the minimum, maximum, median, and average of the numbers in the first n elements of the array.
-This function should not modify the values in the array or print anything out.
-
-Example:
-Calling `all_stats({5, 1, 3, 7, 9}, 5, a, b, c, d);` should result in changes to the following variables:
-* The value of `a` becomes the minimum value in the array, `1`
-* The value of `b` becomes the maximum value in the array, `9`
-* The value of `c` becomes the median value of the array, `5` (because 5 is the middle value when the array is sorted)
-* The value of `d` becomes the average value of the array, `5` (because `(5 + 1 + 3 + 7 + 9) / 5` is `5`)
-
 ## Write test cases
 
 Test cases are located in `statistics_test.cpp`.
@@ -208,23 +184,12 @@ Now that you have written the test cases, you can implement the functions.
 
 You can write them in whatever order you want.
 
-### Allowed library functions: sort() and copy()
-
-The C++ standard library provides a function called `sort()` that you can use to sort an array and a function called `copy()` that you can use to copy the contents of one array to another. In order to use these functions, you have to say `#include <algorithm>` at the start of the file (already done for you in the starter code). 
-
-Then you can sort an array by saying something like `sort(array, array + n);` where `array` is the array you want to sort, and `n` is the number of elements you want to sort.
-`sort()` has return type `void` so it doesn't return a value. However, when the function returns, the first `n` elements of `array` will be in sorted order.
-
-You can copy the first `n` elements of `array1` into `array2` by saying `copy(array1, array1 + n, array2);`. When the function returns, the first `n` elements of `array2` will now have the same values as the first `n` elements of `array1` and `array1` won't be changed at all. This function also has return type `void`.
-
-For this lab, you are allowed to call the `sort()` and `copy()` functions to help you out. You may not call other external library functions.
+For this lab, you may not call external library functions.
 
 ### Hints and reminders
 
 * If a function specification says you can assume the array is sorted, you should try to take advantage of that fact somehow.
 * If you are copying and pasting similar code a lot of times, you should look to see if you can use an existing function, or consider writing an extra function that you can call. You are always allowed to write extra helper functions of your own, or to declare any extra variables that you want.
-* For the `all_stats()` function, the code should be very simple and should call the other 4 functions. But wait! Some of those functions assume the input array is sorted, and the `all_stats()` function doesn't get to assume that.
-* Speaking of sorted arrays, good thing there's that allowed library function, right?
 * If a function specification says you're not allowed to modify the input array, but you really want to do something that modifies it, perhaps you should make a copy of the array. Then you can do whatever you want to the copy.
 * Be careful not to try to access an element that is outside of the bounds of the array!
 
@@ -238,10 +203,9 @@ Run `make test` to test your implementation. Fix your code if necessary.
   * (1 points) TODO comment check
   * (1 points) Style check
   * (48 points) Autograder test cases
-    * (6 points) `minimum()`
-    * (6 points) `maximum()`
-    * (12 points) `average()`
-    * (12 points) `median()`
-    * (12 points) `all_stats()`
+    * (7 points) `minimum()`
+    * (7 points) `maximum()`
+    * (17 points) `average()`
+    * (17 points) `median()`
   * (10 points) 5 good test cases in `statistics_test.cpp`
 * (40 points) Written assignment – see Gradescope for point breakdowns

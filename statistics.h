@@ -22,8 +22,4 @@ int average(const int a[], int n);
 // Returns the median of the first n elements in a sorted array.
 int median(const int a[], int n);
 
-// Compute the min, max, median and average of an unsorted array.
-void all_stats(const int a[SIZE], int n, int& min, int& max, int& med,
-               int& avg);
-
 #endif  // STATISTICS_H
